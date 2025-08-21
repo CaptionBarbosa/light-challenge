@@ -9,6 +9,7 @@ The frontend utilises React, TypeScript, and the MUI component library to render
 For this solution alone, there would ideally be two tables. One would store all captured invoices, with details of the parameters sent and the decision of the state machine (who a notification was sent to) for audit purposes. A second to store scheduled notifications so that these can be processed in batches for load balancing purposes. An optional priority flag can be included to instantly send the notification depending on certain parameters (such as the importance of the recipient).
 
 The schema below outlines how this data might be stored:
+<img width="1860" height="1047" alt="Light Challenge UML" src="https://github.com/user-attachments/assets/8a4eb9c0-2cff-464a-b75b-53ae7abec828" />
 
 ## Potential Improvements
 - While contact address and notification methods are specified statically in this example, in a real-world scenario these would be fetched from a database table with an employee or contact directory, as well as preferred notification method and address.
