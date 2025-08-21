@@ -22,6 +22,9 @@ router.post("/process-invoice", async function (req: Request, res: Response) {
     return res.status(500).json({ error: "Failed to process workflow" });
   }
 
+  // While contact address and notification methods are specified statically in this example
+  // In a real-world scenario these would be fetched from a database table with an employee or contact directory, as well as preferred notification method and address.
+
   // Here I would insert a scheduled notification to send so that notifications can be batched and load balanced accordingly if required.
   // This would require storing the notification in a database with the current timestamp, method of sending, recipient address, and payload (message with any additional actions).
   // An enhancement could include a priority field to allow for immediate processing of high priority notifications.
