@@ -1,0 +1,13 @@
+.appContainer {
+  text-align: center;
+}
+
+.formContainer {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  border: 1px solid #ccc;
+  padding: 20px;
+  width: 40%;
+  margin: auto;
+}

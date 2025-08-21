@@ -1,0 +1,1 @@
+{"version":3,"file":"invoiceTypes.d.ts","sourceRoot":"","sources":["../../src/types/invoiceTypes.tsx"],"names":[],"mappings":"AAAA,MAAM,MAAM,WAAW,GAAG;IACtB,MAAM,EAAE,MAAM,CAAC;IACf,uBAAuB,EAAE,OAAO,CAAC;IACjC,UAAU,EAAE,iBAAiB,CAAC;CACjC,CAAA;AAED,oBAAY,iBAAiB;IACzB,OAAO,YAAY;IACnB,SAAS,cAAc;CAC1B"}
