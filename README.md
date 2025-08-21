@@ -11,6 +11,8 @@ For this solution alone, there would ideally be two tables. One would store all 
 The schema below outlines how this data might be stored:
 
 ## Potential Improvements
+- While contact address and notification methods are specified statically in this example, in a real-world scenario these would be fetched from a database table with an employee or contact directory, as well as preferred notification method and address.
+
 - The solution lacks authetication between the front and back-end services, which would be required in a real-world scenario in order to prevent injection attacks. This would also require some form of token exchange between to front and back-end services, such as a session token, so that the authenticity of the recieved parameters can be checked.
 
 - The endpoint also lacks any unit testing which should be implemented to prevent unwanted behaviour when/if the state machine is changed -- either by the parameters it ingests or the output it sends back as a response.
