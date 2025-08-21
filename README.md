@@ -1,44 +1,23 @@
-# Approval workflow challenge
-At Light, we want to implement the best in class invoice approval workflow application.
-Every time one of our customers receives an invoice from a vendor, an approval request is sent to one more employees (approvers).
+# Approval workflow challenge submission
+This submission utilises a simple state machine approach to effectively traverse decision nodes and arrive at an eventual action, in this case a notification being sent on an invoice capture. The traversal tree is constructed statically using decision and action nodes, with modifications made easy by the node structure.
 
-The decision making about whom to send the approval request can only be based of the following:
-- the invoice amount.
-- department the invoice is sent to.
-- whether the invoice requires manager approval.
+The backend utilises Express and TypeScript for a lightweight and simple server. A router with the accessible endpoint takes in three parameters, namely the invoice amount, the department the invoice is being captured for, and whether the approval requires management approaval. The state machine is then run on the server side, before the outcome notification is sent back to the frontend for display.
 
-It could be all of these items, or any subset of them.
+The frontend utilises React, TypeScript, and the MUI component library to render a simple UI for the invoice details capture. State is stored in the main App component, with the invoiceCaptureComponent calling state update hooks when respective values change. A helper function for the API call is also provided, as a means to make the application easier to extend as more endpoints become available.
 
-**For this challenge we want you to implement the logic to support the worflow described on the figure bellow:**
+## Database Schema
+For this solution alone, there would ideally be two tables. One would store all captured invoices, with details of the parameters sent and the decision of the state machine (who a notification was sent to) for audit purposes. A second to store scheduled notifications so that these can be processed in batches for load balancing purposes. An optional priority flag can be included to instantly send the notification depending on certain parameters (such as the importance of the recipient).
 
-![code_exercise_diagram (2)](https://user-images.githubusercontent.com/112865589/191920630-6c4e8f8e-a8d9-42c2-b31e-ab2c881ed297.jpg)
+The schema below outlines how this data might be stored:
 
-Fig. 1
+## Potential Improvements
+- The solution lacks authetication between the front and back-end services, which would be required in a real-world scenario in order to prevent injection attacks. This would also require some form of token exchange between to front and back-end services, such as a session token, so that the authenticity of the recieved parameters can be checked.
 
-Please note that while you could implement it by simply hardcoding all those conditions, that is not what we are looking for. You don't need to provide a way to update the workflow for this challenge, but we are looking for a design that is dynamic and would allow for updating any of the steps in the workflow.
+- The endpoint also lacks any unit testing which should be implemented to prevent unwanted behaviour when/if the state machine is changed -- either by the parameters it ingests or the output it sends back as a response.
 
-## Challenge requirements
+- The frontend UI is basic and lacks much functionality outside of the single purpose of sending an invoice with these three specific parameters. 
 
-This is the list of things you should provide:
-
-- A database model to support the workflow configuration and execution (a jpeg of the database schema can be put in the README file)
-  - Don't worry about implementing this part, everything can be done in memory for the challenge, we only want to see how you would design the database to support this.
-
-- The logic to process the workflow described in the figure above and an http endpoint to call and execute the workflow:
-  - The endpoint should allow passing invoice amount, department and if a manager approval is required as input fields.
-  - Don't worry about the notification logic, simply printing `"sending approval via Slack"` is enough.
-
-- A simple UI to call the endpoint defined above and execute the workflow.
-
-Don't worry about currency support, you can assume everything is in USD.
-
-Any other consideration and things you would do better/different in a real world scenario feel free to put in the README, no need to implement it.
-
-## Provided code
-
-We provide a basic backend setup in Kotlin, as well as placeholders in the code for you to fill. This is just a suggestion, and **you're welcome to use a different structure and/or language.**.
-
-If you do decide to use another language, **any OO language is fine**.
+- A packages component could be added to the repo to store shared types between the front and back-end, streamlining the definition of these types and avoid potential mismatches when changes are made.
 
 ### How to build & run
 
@@ -46,21 +25,16 @@ If you do decide to use another language, **any OO language is fine**.
 
 ```sh
 cd backend
-./gradlew clean build
-./gradlew run
+pnpm i
+pnpm build-and-start
 ```
 
 ## Frontend
 
 ```sh
 cd frontend
-npm install
-npm run dev
+pnpm i
+pnpm start
 ```
 
-The frontend server provides a proxy to the backend on the `/api` path so you don't run into CORS issues. It expects the backend to be running on port 8080. If you need to change that, update the config on `next.config.js`.
-
-### Submitting your implementation
-
-1. Run `git bundle create challenge-<your-name>.bundle --all`
-2. Send us the generated bundle file
+The frontend is configured to run on port 3000, while the backend runs on port 8080.
