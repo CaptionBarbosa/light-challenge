@@ -7,7 +7,7 @@ router.post("/process-invoice", async function (req: Request, res: Response) {
   const { amount, department, requiresManagerApproval = true } = req.body; // Default value for requiresManagerApproval to ensure higher level appoval is always requested if not defined
 
   if(!amount || !department) {
-    return res.status(403).json({ error: "Invalid request" });
+    return res.status(400).json({ error: "Invalid request" });
   }
 
   const workflowParams: InvoiceData = {
